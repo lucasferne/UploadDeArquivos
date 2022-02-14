@@ -14,9 +14,8 @@ class MenuController extends Controller
        return view('welcome', ['menu' => $menu]);
     }
 
-    public function novaview(){
-        $menus = Menu::all();
-        return view('nova', ['menus' => $menus]);
+    public function novaview($name){
+        return view('nova', ['name' => $name]);
     }
 
     public function store(Request $request){
