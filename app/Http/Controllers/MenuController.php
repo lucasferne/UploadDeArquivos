@@ -15,7 +15,9 @@ class MenuController extends Controller
     }
 
     public function novaview($name){
-        return view('nova', ['name' => $name]);
+        $files = File::all();
+
+        return view('nova', ['name' => $name, 'files' => $files]);
     }
 
     public function store(Request $request){

@@ -10,22 +10,34 @@ use Illuminate\Support\Str;
 
 class UploadController extends Controller
 {
-    public function create(){
+    public function create()
+    {
         $menus = Menu::all();
-       return view('upload.form', ['menus' => $menus]);
+        return view('upload.form', ['menus' => $menus]);
     }
-    public function upload(Request $request){
+    public function upload(Request $request)
+    {
 
         $file = new File;
-        $file->name = $request->name;
-        $file->slug = Str::slug($file->name, '-');
+        if ($request->hasFile('arquivo') && $request->file('arquivo')->isValid()) {
 
+            $extension = $request->arquivo->extension();
+            $file->name = $request->name;
 
-        $request -> file('arquivo') -> store('teste');
+            $slug = Str::slug($file->name, '-');
+            $file->slug = $slug . "-" . strtotime("now") . "." . $extension;
 
-        $file->save();
+            $file->menu = $request->menu;
+            $file->url = $request->name;
+            //$file->url = o local onde o arquivo será salvo dinamicamente
 
-        return redirect('/');
-
+            $file->save();
+            $path = ('arquivos/' . $request->menu);
+            $request->file('arquivo')->move(public_path($path), $file->slug);
+            return redirect('/');
+        } 
+        else {
+            dd("Envie Algo");
+        }
     }
 }

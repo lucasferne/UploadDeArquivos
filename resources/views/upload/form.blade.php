@@ -11,7 +11,7 @@
         </div>
         <div>
             Escolher pra que menu vai
-            <select name="Menu" id="menu">
+            <select name="menu" id="menu">
                 @foreach ($menus as $menu)
                     <option> {{ $menu->name }} </option>
                 @endforeach

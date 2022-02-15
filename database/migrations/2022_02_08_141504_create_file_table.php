@@ -18,6 +18,7 @@ class CreateFileTable extends Migration
             $table->string('name');
             $table->string('slug');
             $table->string('menu');
+            $table->string('url');
         });
     }
 
