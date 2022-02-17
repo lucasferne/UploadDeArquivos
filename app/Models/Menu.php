@@ -10,4 +10,8 @@ class Menu extends Model
     protected $table = 'menu';
     public $timestamps = false;
     use HasFactory;
+
+    public function files(){
+        return $this->hasMany('App\Models\File');
+    }
 }

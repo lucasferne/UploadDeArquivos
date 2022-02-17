@@ -1,6 +1,5 @@
 <h1>{{ $name }}</h1>
 
 @foreach ($files as $file)
-    
-    <br>
+    <a href="arquivos/{{ $name }}/{{ $file->slug }}"> {{ $file->url }}</a>
 @endforeach

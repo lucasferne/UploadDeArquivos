@@ -14,10 +14,12 @@ class MenuController extends Controller
        return view('welcome', ['menu' => $menu]);
     }
 
-    public function novaview($name){
-        $files = File::all();
+    public function novaview($slug){
 
-        return view('nova', ['name' => $name, 'files' => $files]);
+        $menu = Menu::where(['slug' => $slug])->first();
+        $files = File::where(['menu_id' => $menu->id])->get();
+        
+        return view('nova', ['name' => $menu->name, 'files' => $files]);
     }
 
     public function store(Request $request){
